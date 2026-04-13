@@ -40,3 +40,7 @@ Yapılan analizler sonucunda elde edilen temel bulgular şunlardır:
 ## 🛠️ Teknik Gereksinimler
 ```bash
 pip install pandas numpy matplotlib seaborn scikit-learn
+```
+## Hazırlayan:
+Begüm Yaren ÖZTÜRK
+
