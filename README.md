@@ -1,24 +1,26 @@
-# Sınıflandırma Algoritmaları Performans Analizi ve Hiperparametre Optimizasyonu
+# Sınıflandırma Algoritmalarının Karşılaştırmalı Analizi ve Optimizasyonu
 
-Bu proje, farklı veri yapılarına sahip üç popüler veri seti üzerinde; k-En Yakın Komşu (KNN), Destek Vektör Makineleri (SVM) ve Rastgele Orman (Random Forest) algoritmalarının performansını karşılaştırmalı olarak incelemektedir.
+Bu proje, makine öğrenmesi süreçlerinde model seçimi, veri ön işleme, boyut indirgeme ve hiperparametre optimizasyonu aşamalarını kapsamlı bir şekilde ele almaktadır. Çalışma kapsamında, farklı veri yapılarına sahip veri setleri üzerinde popüler sınıflandırma algoritmalarının performans metrikleri analiz edilmiştir.
 
-## 📋 Proje Hakkında
-Bu çalışma, bir uçtan uca makine öğrenmesi hattını (pipeline) temsil eder. Verilerin görselleştirilmesinden başlayarak, ön işleme, hiperparametre optimizasyonu ve model değerlendirme süreçlerini içerir.
+## 📋 Proje Metodolojisi
 
-### 🔍 Kullanılan Veri Setleri
-* **Breast Cancer:** İkili sınıflandırma (Binary Classification) odaklı medikal veri seti.
-* **Wine:** Çok sınıflı (Multi-class) kimyasal analiz veri seti.
-* **Digits:** El yazısı rakamlardan oluşan yüksek boyutlu görüntü veri seti.
+Proje, Bilgisayar Mühendisliği yüksek lisans düzeyinde bir araştırma pipeline'ı izlemektedir:
 
-## 🚀 Temel Özellikler
-* **Boyut İndirgeme:** `PCA` kullanılarak yüksek boyutlu verilerin 2B düzlemde görselleştirilmesi.
-* **Otomatik Optimizasyon:** `GridSearchCV` ile her model için en iyi hiperparametrelerin (n_neighbors, C, kernel, n_estimators vb.) belirlenmesi.
-* **Ölçeklendirme:** Mesafe tabanlı algoritmalar için `StandardScaler` ile veri normalizasyonu.
-* **Görsel Analiz:** Her model için Confusion Matrix (Hata Matrisi) ve genel doğruluk (Accuracy) karşılaştırma grafikleri.
+### 1. Veri Keşfi ve Görselleştirme (EDA)
+* **Boyut İndirgeme (PCA):** Yüksek boyutlu öznitelik uzayına sahip veri setleri (özellikle Digits ve Breast Cancer), varyansın en yüksek olduğu 2 bileşene indirgenerek görselleştirilmiştir. Bu, verilerin sınıfsal ayrılabilirliğini (linearly separable olup olmadıklarını) anlamak için kritik bir adımdır.
+* **Korelasyon Analizi:** Öznitelikler arasındaki istatistiksel ilişkileri belirlemek amacıyla ısı haritaları (Heatmap) üzerinden analiz yapılmıştır.
 
-## 🛠️ Kurulum
-Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
+### 2. Veri Ön İşleme (Preprocessing)
+* **Standardizasyon:** Mesafe tabanlı algoritmaların (KNN ve SVM) büyük ölçekli özniteliklerden etkilenmemesi için `StandardScaler` (Z-score normalizasyonu) kullanılmıştır.
+* **Veri Bölümleme:** Modelin genelleme başarısını (generalization error) ölçmek için veriler %75 Eğitim ve %25 Test olarak ayrılmıştır.
 
-1. Gerekli kütüphaneleri yükleyin:
+### 3. Model Eğitimi ve Hiperparametre Optimizasyonu
+`GridSearchCV` kullanılarak 5-katlı çapraz doğrulama (5-Fold Cross-Validation) ile aşağıdaki parametre uzayları taranmıştır:
+* **K-Nearest Neighbors (KNN):** Komşu sayısı (k), ağırlık fonksiyonları (uniform, distance) ve mesafe metrikleri (Euclidean, Manhattan).
+* **Support Vector Machines (SVM):** Regularizasyon parametresi (C) ve çekirdek (Kernel) fonksiyonları (RBF, Linear).
+* **Random Forest (RF):** Karar ağacı sayısı (n_estimators) ve maksimum ağaç derinliği (max_depth).
+
+## 🛠️ Teknik Gereksinimler
+Çalışmanın yürütülmesi için gerekli kütüphaneler:
 ```bash
 pip install pandas numpy matplotlib seaborn scikit-learn
